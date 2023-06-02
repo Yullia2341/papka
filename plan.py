@@ -1,7 +1,7 @@
 # импорты
 from pygame import *
-import time 
 from random import randint 
+gameover = False
 # класс GameSprite
 class GameSprite(sprite.Sprite):
     def __init__(self, player_image, player_x, player_y, size_x, size_y, player_speed):
@@ -24,9 +24,7 @@ class Player(GameSprite):
             self.rect.x -= self.speed
         if keys_passed[K_RIGHT] and self.rect.x < win_width -80:
             self.rect.x += self.speed
-    def fire(self):
-        bullet = Bullet('bullet.png', self.rect.centerx, self.rect.top, 15,20, 15)
-        bullets.add(bullet)
+
 
 class Ball(GameSprite):
     def update(self):
@@ -36,16 +34,28 @@ class Ball(GameSprite):
             self.rect.x = 0
 # Описание сцен
 
-background = (255, 255, 255)
+background = (300, 300, 300)
 win_height = 500
 win_width = 700 
 window = display.set_mode((win_width, win_height))
 background = (200, 255, 255)
-window.fill(background)
-racket1 = Racket("34696-2-bamboo-stick.png", 0 , 300, )
-, player_x, player_y, size_x, size_y, player_speed
-racket2 = Racket("34696-2-bamboo-stick.png", )
-ball = Ball("1670473154_kartinkof-club-p-kartinki-bomzha-1.png",)
+
+racket1 = Player("34696-2-bamboo-stick.png", 0 , 300, 30, 100, 4)
+racket2 = Player("34696-2-bamboo-stick.png", 670, 300, 30, 100, 4)
+ball = Ball("1670473154_kartinkof-club-p-kartinki-bomzha-1.png",150, 150, 100, 100, 4)
+clock = time.Clock()
+while not gameover:
+    for e in event.get():
+        if e.type == QUIT:
+            gameover = True
+    window.fill(background)
+    racket1.update()
+    racket2.update()
+    ball.update()
+    racket1.reset()
+    racket2.reset()
+    ball.reset()
+    
 
 # Флаги состояния игры(цикл while)
 # игра продолжается если 
@@ -53,4 +63,5 @@ ball = Ball("1670473154_kartinkof-club-p-kartinki-bomzha-1.png",)
 #     не закрыто приложение
 # перемещение ракеток 
 # обновление спрайтов и сцены
-# clock.tick(40)
+    display.update()
+clock.tick(40)
