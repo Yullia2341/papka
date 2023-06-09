@@ -30,13 +30,13 @@ class Player(GameSprite):
         keys_passed = key.get_pressed()
         if keys_passed[K_UP] and self.rect.y > 5:
             self.rect.y -= self.speed
-        if keys_passed[K_DOWN] and self.rect.y < win_width -10:
+        if keys_passed[K_DOWN] and self.rect.y < win_height -100:
             self.rect.y += self.speed
     def update_one(self):
         keys_passed = key.get_pressed()
         if keys_passed[K_w] and self.rect.y > 5:
             self.rect.y -= self.speed
-        if keys_passed[K_s] and self.rect.y < win_width -10:
+        if keys_passed[K_s] and self.rect.y < win_height -100:
             self.rect.y += self.speed
 
 
